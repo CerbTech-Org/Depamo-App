@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1060017887242",
+    "project_id": "depamo-cerb",
+    "storage_bucket": "depamo-cerb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060017887242:android:78beb8ac8a41629de227f3",
+        "android_client_info": {
+          "package_name": "com.example.untitled1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060017887242-6a2fumjmfp7stokuoken11kcln70dkh0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADfZZgirgu6tEp4PC6n2cYUlbCW94KODE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060017887242-6a2fumjmfp7stokuoken11kcln70dkh0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
