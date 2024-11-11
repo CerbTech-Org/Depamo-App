@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'profile_page.dart';
 import 'registration_page.dart';
 
@@ -13,6 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  // Connexion par email et mot de passe
   Future<void> _login() async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
@@ -27,6 +29,30 @@ class _LoginPageState extends State<LoginPage> {
       );
     } catch (e) {
       print("Erreur : $e");
+    }
+  }
+
+  // Connexion avec Google
+  Future<void> _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) return; // L'utilisateur a annulé la connexion
+
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      UserCredential userCredential = await _auth.signInWithCredential(credential);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProfilePage(email: userCredential.user!.email),
+        ),
+      );
+    } catch (e) {
+      print("Erreur lors de la connexion avec Google : $e");
     }
   }
 
@@ -53,6 +79,15 @@ class _LoginPageState extends State<LoginPage> {
             ElevatedButton(
               onPressed: _login,
               child: Text("Se connecter"),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton.icon(
+              icon: Icon(Icons.login),
+              label: Text("Se connecter avec Google"),
+              onPressed: _signInWithGoogle,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue
+              ),
             ),
             TextButton(
               onPressed: () {
